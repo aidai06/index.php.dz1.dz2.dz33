@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма PHP</title>
+</head>
+<body>
+
+<form method="post">
+
+    <input type="text" name="name" placeholder="Имя"><br><br>
+
+    <input type="email" name="email" placeholder="Email"><br><br>
+
+    <select name="age[]" multiple>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+    </select><br><br>
+
+    <label>
+        <input type="checkbox" name="agree">
+        Я согласен
+    </label><br><br>
+
+    <input type="submit" value="Отправить">
+
+</form>
+
+<hr>
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if (!empty($_POST['name'])) {
+        echo "Имя: " . $_POST['name'] . "<br>";
+    } else {
+        echo "Имя не заполнено<br>";
+    }
+
+    if (!empty($_POST['email'])) {
+        echo "Email: " . $_POST['email'] . "<br>";
+    } else {
+        echo "Email не заполнен<br>";
+    }
+
+    if (!empty($_POST['age'])) {
+        echo "Возраст: ";
+        print_r($_POST['age']);
+        echo "<br>";
+    } else {
+        echo "Возраст не выбран<br>";
+    }
+
+    if (!empty($_POST['agree'])) {
+        echo "Согласен ✔<br>";
+    } else {
+        echo "Не согласен ✖<br>";
+    }
+}
+
+?>
+
+</body>
+</html>

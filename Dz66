@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Урок 6:Функции для работ с массивами php</title>
+</head>
+<body>
+    <?php
+    function debug($data)
+    {
+        echo '<pre>'.print_r($data,1).'</pre>';
+    }
+$goods = [
+    [
+        'title' => 'Nokia',
+        'price' => '100',
+        'qty' => '10',
+    ],
+    [
+        'title' => 'Sony',
+        'price' => '120',
+        'qty' => '7',
+    ],
+    [
+        'title' => 'LG',
+        'price' => '105',
+        'qty' => '15',
+    ],
+];
+
+$food = array(
+              'fruits' => array('orange', 'banana', 'apple'),
+              'veggie' => array('carrot', 'collard', 'pea')
+              );
+$n = "Hello world";
+var_dump(count($food, COUNT_RECURSIVE)); // рекурсивный подсчет 
+debug(count($food,0)); // обычный подсчет 
+
+
+$food = [
+    'fruits' => ['apple', 'banana', 'orange'],
+    'veggie' => ['carrot', 'pea']
+];
+
+echo "<h3>Обычный count()</h3>";
+echo count($food); // считает только верхний уровень (fruits, veggie)
+
+echo "<hr>";
+
+echo "<h3>COUNT_RECURSIVE</h3>";
+echo count($food, COUNT_RECURSIVE); // считает всё внутри массива
+
+
+
+ 
+</body>
+</html>

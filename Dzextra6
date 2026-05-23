@@ -1,0 +1,35 @@
+<?php 
+
+function debug($data)
+{
+    echo '<pre>' . print_r($data, 1) . '</pre>';
+}
+
+
+ 
+
+echo "<h3>array_values()</h3>";
+
+// Ассоциативный массив (ключи + значения)
+$user = [
+    'name' => 'Alex',
+    'age' => 20,
+    'city' => 'Bishkek'
+];
+
+
+debug(array_values($user));
+
+
+
+echo "<hr>";
+
+echo "<h3>array_unique()</h3>";
+
+
+$colors = ["red", "blue", "red", "green", "blue", "yellow"];
+
+
+debug(array_unique($colors));
+
+?>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>функция</title>
+</head>
+<body>
+    <?php
+    // это нужный код, потому что с его помощью ошибки в коде сразу выводятся на экран
+    error_reporting(-1); 
+
+    function debug($data)
+    {
+        echo '<pre>'.print_r($data,1).'</pre>';
+    }
+
+    /*
+    * Напишите функцию Str_count($str, $substr).
+    * Эта функция принимает 2 аргумента: строку ($str) и подстроку ($substr).
+    * Функция должна вернуть, сколько раз подстрока встречается внутри строки.
+    * Пример: 'hello', 'l' => 2
+    */
+
+    function str_count($str,$substr)
+    {
+        return substr_count($str,$substr);
+    }
+
+    // Я думала, что '' можно и не писать, но оказалось, что это не так. 
+    // Потому что если мы ищем, но не передаем, ЧТО именно искать, функция не поймет. Обязательно нужно писать ''.
+    echo str_count('hello', 'l');
+    echo '<br>';
+    echo str_count('Aiymkan', 'a');
+    echo '<br>';
+
+    function my_srtlen($str)
+    {
+        $count = 0;
+        while(isset($str[$count])) 
+            {
+                $count++;
+            }
+            return $count;
+    }
+
+    echo my_srtlen('hello Aiymkan');
+    echo '<br>';
+
+    function my_strlen1($str)
+    {
+        $count = 0;
+        // $i = 0 -- это знак, что мы начинаем с самого первого символа строки
+        // isset($str[$i]) -- это проверяльщик, он смотрит: есть ли вообще такой символ?
+        // Если символ есть, то цикл продолжает свою работу.
+        // Если символа больше нет, то он останавливает работу.
+        // $i++ -- увеличиваем индекс на 1, идем к следующему символу.
+        // То есть, если нужный символ нашелся, мы идем искать дальше и всё складывается дальше.
+        for($i = 0; isset($str[$i]); $i++) 
+            {
+                $count++; // а это просто считает количество этих символов
+            }
+            return $count;
+    }
+
+    echo my_strlen1('Hello world  my name Aiymkan!');
+    echo '<br>';
+    // здесь 4 означает "начни считать отсюда", а -2 означает "отними столько-то с конца"
+    echo substr('Hello world', 4, -2); 
+    echo '<br>';
+
+
+    // $str -- строка, $start -- откуда начинаем, $length -- сколько символов берем (если не указано -- до самого конца)
+    function my_substr($str,$start,$length = null) 
+    {
+        $result =''; // открываем пустую строку, потому что результат будет сохраняться именно сюда
+        
+        if($length === null) // длина не указана, значит берем строку от начала и до самого конца
+            {
+                // $i = $start -- начинает отсюда, isset($str[$i]) -- проверяет, есть ли символ, $i++ -- переходит к следующему символу
+                for($i =$start; isset($str[$i]);$i++)
+                    {
+                        $result.=$i.'-'.$str[$i].'<br>';
+                    }
+            }else {
+                for($i=$start;isset($str[$i]);$i++) {
+                    $result.=$i.'-'.$str[$i].'<br>';
+                }
+            }
+            return $result;
+    }
+
+    function my_substr1($str, $start, $length)
+    {
+        $result = '';
+      
+            for ($i = $start; isset($str[$i]) && $i < $start + $length; $i++) {
+                $result .= $i.' - '.$str[$i].'<br>';;
+            }
+        
+        return $result;
+    }
+
+    function my_substr2($str, $start, $length)
+    {
+        $result = "";
+        $str_len = 0;
+
+        // считает общую длину строки
+        while (isset($str[$str_len])) { 
+            $str_len++;
+        }
+
+        if ($length < 0) {
+            $length = $str_len - $start + $length;
+        }
+
+        for ($i = $start; $i < $start + $length; $i++) {
+            if (!isset($str[$i])) break;
+            $result .= $str[$i];
+        }
+        return $result;
+    }
+    echo my_substr2('Hello world!', 9, -1);
+    echo '<br>';
+
+    // считает, сколько раз $substr встречается внутри $str
+    function my_substr_count($str, $substr) 
+    {
+        $count = 0; // считает, сколько раз встретилось
+        
+        // $i = 0 → начинает с самого начала
+        // isset($str[$i]) → проверяет, есть ли символ
+        // $i++ → переходит к следующему символу, проверяет каждую позицию
+        for ($i = 0; isset($str[$i]); $i++) {
+            
+            // Внутри строки $str:
+            // берет кусочек, начиная с позиции $i
+            // длиной с размер искомого $substr
+            // и проверяет: равен ли этот кусочек нашему $substr?
+            if (my_substr2($str, $i, my_strlen1($substr)) === $substr) {
+                $count++; 
+            }
+        }
+        return $count;
+    }
+
+    /*
+     * Напишите функцию no_space(string $str): string, которая принимает 
+     * аргументом строку и возвращает строку с удаленными пробелами
+     * */
+
+    function no_space(string $str): string
+    {
+        return str_replace(' ', '', $str);
+    }
+
+    var_dump(no_space(' Hello, world,My name Aiymkan! '));
+    echo'<br>';
+
+    /*
+     * Напишите функцию max_number(int $num): int, которая принимает аргументом число и 
+     * возвращает максимальное число из цифр, полученного аргумента. Пример: 123 => 321
+     * */
+
+    function max_number(int $num): int
+    {
+        $digits = str_split($num);
+        rsort($digits); // сортирует массив от больших чисел к меньшим
+        return (int)implode('', $digits); // implode('', $digits) собирает массив обратно в один текст (строку)
+    }
+
+    echo max_number(3123009);
+
+    ?>
+</body>
+</html>
